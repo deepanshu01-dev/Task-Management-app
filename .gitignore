@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+env/
+venv2/
+.env
+
+# DB files
+*.db
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
