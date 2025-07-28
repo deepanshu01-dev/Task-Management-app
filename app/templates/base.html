@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Style */
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer Style */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Text */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            footer {
+                font-size: 0.8rem;
+            }
+        }
+        
+        .flash {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.flash.success { background: #d4edda; color: #155724; }
+.flash.info    { background: #d1ecf1; color: #0c5460; }
+.flash.error   { background: #f8d7da; color: #721c24; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📝 My To-Do App</h1>
+    </header>
+
+    <main>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flashes">
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+
+    <footer>
+        &copy; {{ 2025 }} My To-Do App. All rights reserved.
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Your Tasks - To-Do App{% endblock %}
+
+{% block content %}
+<div class="task-container">
+    <h2>Your Tasks</h2>
+    <!-- Form to Add New Task -->
+    <form method="POST" action="{{ url_for('tasks.add_task') }}" class="add-form">
+        <input type="text" name="title" placeholder="Add a new task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <!-- Task List -->
+    <ul class="task-list">
+        {% for task in tasks %}
+        <li class="task-item">
+            <span class="task-title">{{ task.title }}</span>
+            <span class="task-status">{{ task.status }}</span>
+
+            <!-- Toggle Status Form -->
+            <form method="POST" action="{{ url_for('tasks.toggle_status', id=task.id) }}">
+                <button class="toggle-btn">Next Status</button>
+            </form>
+            <form method="POST" action="{{ url_for('tasks.delete_task', id=task.id) }}">
+                <button class="delete">Delete</button>
+            </form>
+        </li>
+        {% else %}
+        <li class="no-tasks">You have no tasks yet.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Clear All Button -->
+    <div class="clear-container">
+        <a href="{{ url_for('tasks.clear') }}" class="clear-btn" onclick="return confirm('Are you sure you want to clear all tasks?')">Clear All Tasks</a>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    .task-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .task-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #007BFF;
+    }
+
+    .flashes {
+        margin-bottom: 20px;
+    }
+
+    .flash {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .delete {
+        
+        padding: 10px 18px;
+        background: #e3432b;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+        size: 10px;
+
+    }
+
+    .flash.success { background-color: #d4edda; color: #155724; }
+    .flash.info    { background-color: #d1ecf1; color: #0c5460; }
+    .flash.error   { background-color: #f8d7da; color: #721c24; }
+
+    .add-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .add-form input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .add-form button {
+        padding: 10px 18px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .add-form button:hover {
+        background: #0056b3;
+    }
+
+    .task-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .task-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f9f9f9;
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+
+    .task-title {
+        flex: 1;
+    }
+
+    .task-status {
+        margin-right: 10px;
+        font-style: italic;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .toggle-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+    }
+
+    .toggle-btn:hover {
+        background: #218838;
+    }
+
+    .no-tasks {
+        text-align: center;
+        color: #777;
+        font-style: italic;
+        padding: 20px 0;
+    }
+
+    .clear-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .clear-btn {
+        color: #dc3545;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 15px;
+        border: 1px solid #dc3545;
+        border-radius: 6px;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    .clear-btn:hover {
+        background: #dc3545;
+        color: white;
+    }
+</style>
+{% endblock %}
