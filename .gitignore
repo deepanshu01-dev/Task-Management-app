@@ -14,3 +14,5 @@ venv2/
 
 # OS files
 .DS_Store
+
+todo.db
