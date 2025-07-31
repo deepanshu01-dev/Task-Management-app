@@ -5,20 +5,24 @@
 {% block content %}
 <div class="login-container">
     <form method="POST" action="/register">
-        <h2>Register</h2>
+        <h2>Create an Account</h2>
+
 
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">👤 Username</label>
             <input type="text" name="username" id="username" required placeholder="Enter your username">
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">🔒 Password</label>
             <input type="password" name="password" id="password" required placeholder="Enter your password">
         </div>
-
         <button type="submit">Register</button>
     </form>
+    <br>
+    <p class="auth-link">
+        Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a>
+    </p>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="flashes">
@@ -31,59 +35,144 @@
 </div>
 
 <style>
+/* Container styling */
+.login-container {
+    background: #ffffff;
+    padding: 40px 30px;
+    max-width: 450px;
+    margin: 70px auto;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeSlideIn 0.8s ease-out;
+}
+
+/* Form heading */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #6e8efb;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Input group */
+.form-group {
+    margin-bottom: 20px;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.form-group:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.form-group:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #a777e3;
+    box-shadow: 0 0 6px rgba(167, 119, 227, 0.3);
+    outline: none;
+}
+
+/* Button styling */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: linear-gradient(to right, #6e8efb, #a777e3);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    transform: scale(1.03);
+    background: linear-gradient(to right, #5b74e0, #8c5cd4);
+}
+
+/* Auth link below the form */
+.auth-link {
+    text-align: center;
+    font-size: 0.95rem;
+    margin-top: 20px;
+}
+
+.auth-link a {
+    color: #6e8efb;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-link a:hover {
+    color: #a777e3;
+}
+
+/* Flash messages already styled in base.html */
+.flashes {
+    margin-top: 20px;
+    animation: fadeIn 0.6s ease;
+}
+
+/* Animations */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
     .login-container {
-        background: white;
-        padding: 40px 30px;
-        max-width: 400px;
-        margin: 50px auto;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-radius: 10px;
+        margin: 40px 15px;
+        padding: 30px 20px;
     }
-
-    .login-container h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        color: #007BFF;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        transition: border 0.3s;
-    }
-
-    .form-group input:focus {
-        border-color: #007BFF;
-        outline: none;
-    }
-
-    button[type="submit"] {
-        width: 100%;
-        padding: 12px;
-        background: #007BFF;
-        color: white;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-
-    button[type="submit"]:hover {
-        background: #0056b3;
-    }
+}
 </style>
+
 {% endblock %}

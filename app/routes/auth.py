@@ -19,7 +19,7 @@ def login():
   
     else:
         flash("invalid credentials!") 
-        return redirect(url_for('register'))
+        return redirect(url_for('auth.register'))
     
   return render_template('login.html')
 
@@ -30,7 +30,8 @@ def register():
     password = request.form.get('password')
     
     try:
-      user_credentials = User_Credentials(username = username, password = password)
+      user_credentials = User_Credentials(username = username, 
+      password = password)
       db.session.add(user_credentials)
       db.session.commit()
       flash("successfully registered!", 'success!')
