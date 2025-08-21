@@ -30,12 +30,11 @@ A simple task management app built with Flask. Users can register, log in, and m
 > 🔒 _Logged-out users can't access any task data._
 
 ## 🖼️ Screenshots
+### 📝 Register Page
+![Register Page](screenshots/register_page.png)
 
 ### 🔐 Login Page
 ![Login Page](screenshots/login_page.png)
-
-### 📝 Register Page
-![Register Page](screenshots/register_page.png)
 
 ### 📋 Task Management Page
 ![Task Dashboard](screenshots/task_management_page.png)
