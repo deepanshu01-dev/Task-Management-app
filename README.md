@@ -29,3 +29,14 @@ A simple task management app built with Flask. Users can register, log in, and m
 > 💡 _Each user gets their own task list — tasks are private and secure._  
 > 🔒 _Logged-out users can't access any task data._
 
+## 🖼️ Screenshots
+
+### 🔐 Login Page
+![Login Page](screenshots/login_page.png)
+
+### 📝 Register Page
+![Register Page](screenshots/register_page.png)
+
+### 📋 Task Management Page
+![Task Dashboard](screenshots/task_management_page.png)
+
